@@ -788,8 +788,50 @@ a:focus {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.5rem;
+  align-items: flex-start;
+  gap: 1.5rem 3rem;
   margin-bottom: 1.75rem;
+}
+
+/* Single- and multi-stage tasks are bracketed separately so a visitor can tell
+   which is which without clicking. Colours echo the labels in the results chart. */
+.task-group-label {
+  display: block;
+  text-align: center;
+  margin-bottom: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #0052ba;
+}
+
+.task-group-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-top: 0.8rem;
+  border-top: 2px solid rgba(0, 82, 186, 0.3);
+}
+
+.task-group.is-multi .task-group-label {
+  color: #c0392b;
+}
+
+.task-group.is-multi .task-group-tabs {
+  border-top-color: rgba(192, 57, 43, 0.3);
+}
+
+.task-group.is-multi .task-tab:hover {
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+.task-group.is-multi .task-tab.is-active {
+  background: #c0392b;
+  border-color: #c0392b;
+  color: #fff;
 }
 
 .task-tab {

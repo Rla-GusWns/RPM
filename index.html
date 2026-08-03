@@ -54,7 +54,7 @@
 
   <!-- Critical CSS -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css?v=5">
+  <link rel="stylesheet" href="static/css/index.css?v=6">
 
   <!-- Non-critical CSS -->
   <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -67,7 +67,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script defer src="static/js/index.js?v=5"></script>
+  <script defer src="static/js/index.js?v=6"></script>
 
   <script type="application/ld+json">
   {
@@ -322,87 +322,99 @@
       -->
       <div class="task-tabs">
 
+        <!-- Grouped so the stage is visible before any tab is clicked. The wrappers are
+             presentational so the tablist still exposes only the five tabs. -->
         <div class="task-tablist" role="tablist" aria-label="Evaluation tasks">
-          <button class="task-tab is-active" role="tab" id="task-tab-1" aria-controls="task-panel-1" aria-selected="true" tabindex="0">1 &middot; Slot-Insertion</button>
-          <button class="task-tab" role="tab" id="task-tab-2" aria-controls="task-panel-2" aria-selected="false" tabindex="-1">2 &middot; Peg-in-Hole</button>
-          <button class="task-tab" role="tab" id="task-tab-3" aria-controls="task-panel-3" aria-selected="false" tabindex="-1">3 &middot; Cube Stacking</button>
-          <button class="task-tab" role="tab" id="task-tab-4" aria-controls="task-panel-4" aria-selected="false" tabindex="-1">4 &middot; Three-Cube Stacking</button>
-          <button class="task-tab" role="tab" id="task-tab-5" aria-controls="task-panel-5" aria-selected="false" tabindex="-1">5 &middot; Stacking-and-Peg Assembly</button>
+          <div class="task-group" role="presentation">
+            <span class="task-group-label">Single stage</span>
+            <div class="task-group-tabs" role="presentation">
+              <button class="task-tab is-active" role="tab" id="task-tab-1" aria-controls="task-panel-1" aria-selected="true" tabindex="0">1 &middot; Slot-Insertion</button>
+              <button class="task-tab" role="tab" id="task-tab-2" aria-controls="task-panel-2" aria-selected="false" tabindex="-1">2 &middot; Peg-in-Hole</button>
+              <button class="task-tab" role="tab" id="task-tab-3" aria-controls="task-panel-3" aria-selected="false" tabindex="-1">3 &middot; Cube Stacking</button>
+            </div>
+          </div>
+          <div class="task-group is-multi" role="presentation">
+            <span class="task-group-label">Multi stage</span>
+            <div class="task-group-tabs" role="presentation">
+              <button class="task-tab" role="tab" id="task-tab-4" aria-controls="task-panel-4" aria-selected="false" tabindex="-1">4 &middot; Three-Cube Stacking</button>
+              <button class="task-tab" role="tab" id="task-tab-5" aria-controls="task-panel-5" aria-selected="false" tabindex="-1">5 &middot; Stacking-and-Peg Assembly</button>
+            </div>
+          </div>
         </div>
 
         <div class="task-compare-head" aria-hidden="true">
-          <span>w/o RPM</span>
-          <span class="is-rpm">w/ RPM</span>
+          <span>Without RPM</span>
+          <span class="is-rpm">With RPM</span>
         </div>
 
         <div class="task-panel is-active" role="tabpanel" id="task-panel-1" aria-labelledby="task-tab-1">
           <div class="task-videos">
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task1_baseline.mp4"><span><b>Task 1</b> &middot; w/o RPM<br>coming soon</span></div>
-              <figcaption>w/o RPM</figcaption>
+              <div class="video-placeholder" data-src="static/videos/task1_baseline.mp4"><span><b>Task 1</b> &middot; Without RPM<br>coming soon</span></div>
+              <figcaption>Without RPM</figcaption>
             </figure>
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task1_rpm.mp4"><span><b>Task 1</b> &middot; w/ RPM<br>coming soon</span></div>
-              <figcaption class="is-rpm">w/ RPM</figcaption>
+              <div class="video-placeholder" data-src="static/videos/task1_rpm.mp4"><span><b>Task 1</b> &middot; With RPM<br>coming soon</span></div>
+              <figcaption class="is-rpm">With RPM</figcaption>
             </figure>
           </div>
-          <p class="task-caption">Slot-Insertion <span class="task-tag">single-stage</span></p>
+          <p class="task-caption">Slot-Insertion</p>
         </div>
 
         <div class="task-panel" role="tabpanel" id="task-panel-2" aria-labelledby="task-tab-2" hidden>
           <div class="task-videos">
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task2_baseline.mp4"><span><b>Task 2</b> &middot; w/o RPM<br>coming soon</span></div>
-              <figcaption>w/o RPM</figcaption>
+              <div class="video-placeholder" data-src="static/videos/task2_baseline.mp4"><span><b>Task 2</b> &middot; Without RPM<br>coming soon</span></div>
+              <figcaption>Without RPM</figcaption>
             </figure>
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task2_rpm.mp4"><span><b>Task 2</b> &middot; w/ RPM<br>coming soon</span></div>
-              <figcaption class="is-rpm">w/ RPM</figcaption>
+              <div class="video-placeholder" data-src="static/videos/task2_rpm.mp4"><span><b>Task 2</b> &middot; With RPM<br>coming soon</span></div>
+              <figcaption class="is-rpm">With RPM</figcaption>
             </figure>
           </div>
-          <p class="task-caption">Peg-in-Hole <span class="task-tag">single-stage</span></p>
+          <p class="task-caption">Peg-in-Hole</p>
         </div>
 
         <div class="task-panel" role="tabpanel" id="task-panel-3" aria-labelledby="task-tab-3" hidden>
           <div class="task-videos">
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task3_baseline.mp4"><span><b>Task 3</b> &middot; w/o RPM<br>coming soon</span></div>
-              <figcaption>w/o RPM</figcaption>
+              <div class="video-placeholder" data-src="static/videos/task3_baseline.mp4"><span><b>Task 3</b> &middot; Without RPM<br>coming soon</span></div>
+              <figcaption>Without RPM</figcaption>
             </figure>
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task3_rpm.mp4"><span><b>Task 3</b> &middot; w/ RPM<br>coming soon</span></div>
-              <figcaption class="is-rpm">w/ RPM</figcaption>
+              <div class="video-placeholder" data-src="static/videos/task3_rpm.mp4"><span><b>Task 3</b> &middot; With RPM<br>coming soon</span></div>
+              <figcaption class="is-rpm">With RPM</figcaption>
             </figure>
           </div>
-          <p class="task-caption">Cube Stacking <span class="task-tag">single-stage</span></p>
+          <p class="task-caption">Cube Stacking</p>
         </div>
 
         <div class="task-panel" role="tabpanel" id="task-panel-4" aria-labelledby="task-tab-4" hidden>
           <div class="task-videos">
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task4_baseline.mp4"><span><b>Task 4</b> &middot; w/o RPM<br>coming soon</span></div>
-              <figcaption>w/o RPM</figcaption>
+              <div class="video-placeholder" data-src="static/videos/task4_baseline.mp4"><span><b>Task 4</b> &middot; Without RPM<br>coming soon</span></div>
+              <figcaption>Without RPM</figcaption>
             </figure>
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task4_rpm.mp4"><span><b>Task 4</b> &middot; w/ RPM<br>coming soon</span></div>
-              <figcaption class="is-rpm">w/ RPM</figcaption>
+              <div class="video-placeholder" data-src="static/videos/task4_rpm.mp4"><span><b>Task 4</b> &middot; With RPM<br>coming soon</span></div>
+              <figcaption class="is-rpm">With RPM</figcaption>
             </figure>
           </div>
-          <p class="task-caption">Three-Cube Stacking <span class="task-tag">multi-stage</span></p>
+          <p class="task-caption">Three-Cube Stacking</p>
         </div>
 
         <div class="task-panel" role="tabpanel" id="task-panel-5" aria-labelledby="task-tab-5" hidden>
           <div class="task-videos">
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task5_baseline.mp4"><span><b>Task 5</b> &middot; w/o RPM<br>coming soon</span></div>
-              <figcaption>w/o RPM</figcaption>
+              <div class="video-placeholder" data-src="static/videos/task5_baseline.mp4"><span><b>Task 5</b> &middot; Without RPM<br>coming soon</span></div>
+              <figcaption>Without RPM</figcaption>
             </figure>
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task5_rpm.mp4"><span><b>Task 5</b> &middot; w/ RPM<br>coming soon</span></div>
-              <figcaption class="is-rpm">w/ RPM</figcaption>
+              <div class="video-placeholder" data-src="static/videos/task5_rpm.mp4"><span><b>Task 5</b> &middot; With RPM<br>coming soon</span></div>
+              <figcaption class="is-rpm">With RPM</figcaption>
             </figure>
           </div>
-          <p class="task-caption">Stacking-and-Peg Assembly <span class="task-tag">multi-stage</span></p>
+          <p class="task-caption">Stacking-and-Peg Assembly</p>
         </div>
 
       </div>
