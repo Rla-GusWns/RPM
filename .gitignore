@@ -1,0 +1,8 @@
+# The paper is not open access — never publish the PDF with the site.
+*.pdf
+
+# High-resolution source figures; the web-ready copies live in static/images/.
+figure/
+
+# Source photo for the favicon; the cropped icons live in static/images/.
+reverse_card.png

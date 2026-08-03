@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Reverse Playback Motion">
+  <title>Reverse Playback Motion</title>
+  <!-- 16px variant: the oval and the black outline turn to mush at this size,
+       so only the two arrows survive, in flat white on blue. -->
+  <rect width="100" height="100" rx="16" fill="#0052ba"/>
+  <g fill="#ffffff">
+    <path id="rev-arrow-16" d="M33.03 75.46 L59.19 49.29 L50.71 40.81 L81.11 38.69 L78.99 69.09 L70.51 60.61 L44.34 86.77 Z"/>
+    <use href="#rev-arrow-16" transform="rotate(180 50 50)"/>
+  </g>
+</svg>

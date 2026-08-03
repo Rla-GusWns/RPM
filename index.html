@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Reverse Playback Motion (RPM) - Hyunjun Kim et al.">
+  <meta name="description" content="Reverse Playback Motion (RPM): start from the goal state and teleoperate in reverse. Up to 3x faster demonstration collection for non-experts, with better VLA policy performance.">
+  <meta name="keywords" content="reverse playback motion, RPM, vision-language-action model, VLA, teleoperation, time reversal, peg-in-hole, robot manipulation, imitation learning">
+  <meta name="author" content="Hyunjun Kim, Jaeseog Won, Hong-ryul Jung, Donghoon Kim, Minsuk Ko, Hyungpil Moon">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Reverse Playback Motion: A Simple Way for Anyone to Obtain High-Quality Demonstration Data">
+  <meta property="og:description" content="Start from the goal and teleoperate in reverse. RPM makes hard, constrained manipulation demonstrations easy to collect.">
+  <!-- TODO: replace with your published URL (e.g. https://<username>.github.io/RPM_Projectpage/) -->
+  <meta property="og:url" content="https://YOUR_DOMAIN.com/RPM_Projectpage">
+  <meta property="og:image" content="https://YOUR_DOMAIN.com/RPM_Projectpage/static/images/fig1_overview.png">
+  <meta property="og:image:alt" content="Overview of Reverse Playback Motion">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Reverse Playback Motion: A Simple Way for Anyone to Obtain High-Quality Demonstration Data">
+  <meta name="twitter:description" content="Start from the goal and teleoperate in reverse. RPM makes hard, constrained manipulation demonstrations easy to collect.">
+  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/RPM_Projectpage/static/images/fig1_overview.png">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="Reverse Playback Motion: A Simple Way for Anyone to Obtain High-Quality Demonstration Data">
+  <meta name="citation_author" content="Kim, Hyunjun">
+  <meta name="citation_author" content="Won, Jaeseog">
+  <meta name="citation_author" content="Jung, Hong-ryul">
+  <meta name="citation_author" content="Kim, Donghoon">
+  <meta name="citation_author" content="Ko, Minsuk">
+  <meta name="citation_author" content="Moon, Hyungpil">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_journal_title" content="International Journal of Precision Engineering and Manufacturing">
+  <meta name="citation_doi" content="10.1007/s12541-026-01589-3">
+
+  <meta name="theme-color" content="#0052ba">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <title>Reverse Playback Motion (RPM)</title>
+
+  <!-- UNO reverse card: the paper's core idea, played backwards.
+       ?v=2 busts the cached favicon from the original template, which lived at the same path. -->
+  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg?v=2">
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="static/images/apple-touch-icon.png?v=2">
+
+  <!-- Critical CSS -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css?v=5">
+
+  <!-- Non-critical CSS -->
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/index.js?v=5"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Reverse Playback Motion: A Simple Way for Anyone to Obtain High-Quality Demonstration Data",
+    "description": "A data collection framework for robot manipulation in which operators start from the goal state and perform the reverse motion, which is then time-reversed and re-executed in simulation to yield physically valid forward demonstrations.",
+    "author": [
+      { "@type": "Person", "name": "Hyunjun Kim", "affiliation": { "@type": "Organization", "name": "Sungkyunkwan University" } },
+      { "@type": "Person", "name": "Jaeseog Won", "affiliation": { "@type": "Organization", "name": "Sungkyunkwan University" } },
+      { "@type": "Person", "name": "Hong-ryul Jung", "affiliation": { "@type": "Organization", "name": "Sungkyunkwan University" } },
+      { "@type": "Person", "name": "Donghoon Kim", "affiliation": { "@type": "Organization", "name": "LG Electronics" } },
+      { "@type": "Person", "name": "Minsuk Ko", "affiliation": { "@type": "Organization", "name": "LG Electronics" } },
+      { "@type": "Person", "name": "Hyungpil Moon", "affiliation": { "@type": "Organization", "name": "Sungkyunkwan University" } }
+    ],
+    "datePublished": "2026-07-29",
+    "publisher": { "@type": "Organization", "name": "International Journal of Precision Engineering and Manufacturing" },
+    "sameAs": "https://doi.org/10.1007/s12541-026-01589-3",
+    "isAccessibleForFree": true
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Reverse Playback Motion:<br>A Simple Way for Anyone to Obtain High-Quality Demonstration Data</h1>
+            <!-- To link an author, wrap the name only (not the superscripts):
+                   <span class="author-block"><a href="https://scholar.google.com/citations?user=ID"
+                     target="_blank">Hyunjun Kim</a><sup>1</sup><sup>*</sup>,</span>
+                 Authors without a profile stay plain text. -->
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><a href="https://scholar.google.com/citations?user=u7UF0aMAAAAJ" target="_blank">Hyunjun Kim</a><sup>1</sup><sup>*</sup>,</span>
+              <span class="author-block">Jaeseog Won<sup>1</sup><sup>*</sup>,</span>
+              <span class="author-block"><a href="https://scholar.google.com/citations?user=6pffcCIAAAAJ" target="_blank">Hong-ryul Jung</a><sup>2</sup><sup>*</sup>,</span>
+              <span class="author-block">Donghoon Kim<sup>3</sup>,</span>
+              <span class="author-block">Minsuk Ko<sup>3</sup>,</span>
+              <span class="author-block"><a href="https://scholar.google.com/citations?user=kBU7Os0AAAAJ" target="_blank">Hyungpil Moon</a><sup>1,2</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <sup>1</sup>Intelligent Robotics, Sungkyunkwan University &nbsp;
+                <sup>2</sup>Mechanical Engineering, Sungkyunkwan University<br>
+                <sup>3</sup>Production Engineering Research Institute, LG Electronics<br>
+                <a href="https://link.springer.com/article/10.1007/s12541-026-01589-3" target="_blank">Int.
+                J. Precision Engineering and Manufacturing (IJPEM), 2026</a>
+              </span>
+              <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Springer Nature SharedIt link: free read-only access, no PDF hosted here -->
+                <span class="link-block">
+                  <a href="https://rdcu.be/fwE6J" target="_blank"
+                     class="external-link button is-normal is-rounded is-dark"
+                     title="Read the full text for free (Springer Nature SharedIt)">
+                    <span class="icon"><i class="fas fa-file-alt"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- Official article page. Behind a paywall, but it is the citable record. -->
+                <span class="link-block">
+                  <a href="https://link.springer.com/article/10.1007/s12541-026-01589-3" target="_blank"
+                     class="external-link button is-normal is-rounded is-dark"
+                     title="Official article page (DOI: 10.1007/s12541-026-01589-3)">
+                    <span class="icon"><i class="fas fa-external-link-alt"></i></span>
+                    <span>Springer</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a class="external-link button is-normal is-rounded is-dark is-disabled"
+                     aria-disabled="true" title="Code will be released later">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code (Coming Soon)</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaser -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <!-- Teaser video. Once the file exists, replace the placeholder below with:
+        <video autoplay controls muted loop playsinline preload="metadata">
+          <source src="static/videos/teaser.mp4" type="video/mp4">
+        </video>
+        -->
+        <div class="video-placeholder is-teaser" data-src="static/videos/teaser.mp4">
+          <span><b>Teaser video</b><br>coming soon</span>
+        </div>
+        <h2 class="subtitle has-text-centered">
+          Hard sub-tasks are teleoperated <b>backward from the goal state</b>, easy ones forward.
+          Time-reversing and re-simulating the reverse segments yields a complete forward demonstration —
+          the operator never has to perform the difficult alignment motion.
+        </h2>
+      </div>
+    </div>
+  </section>
+  <!-- End teaser -->
+
+  <!-- Abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              High-quality robot learning data is essential for advancing Vision-Language-Action (VLA) models, yet
+              collecting it at scale remains the primary bottleneck in their development. This bottleneck is further
+              amplified for manipulation tasks that require tight pose alignment or impose geometric constraints, where
+              small errors lead to task failure, such as peg-in-hole. To address this, we propose <b>Reverse Playback
+              Motion (RPM)</b>, a novel data collection framework for robot manipulation. Rather than attempting to
+              precisely place an object into a target configuration, operators instead start from the goal state and
+              perform the reverse motion, which is inherently easier to execute. The collected reverse motions are then
+              reconstructed into valid forward trajectories through time-reversal of the recorded end-effector poses. We
+              evaluate RPM across five constrained manipulation tasks, including both single-stage and multi-stage
+              scenarios, and demonstrate that it enables up to <b>3 times faster data collection</b> for non-expert
+              operators, while achieving superior policy performance compared to conventionally collected demonstrations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End abstract -->
+
+  <!-- Overview -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Overview</h2>
+      <img class="figure-plate" src="static/images/fig1_overview.png" alt="Overview of reverse playback motion for single-stage and multi-stage tasks"/>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              Numbered frames are key states of each task. A task is split into sub-tasks, and each sub-task is
+              teleoperated in whichever direction is easier: <span class="legend-fwd">red</span> segments are recorded
+              forward, <span class="legend-rev">blue</span> segments are recorded <b>in reverse, starting from the
+              goal</b>. The &ldquo;Recorded&nbsp;a&rarr;b&rdquo; labels give the order in which the operator actually
+              teleoperated each segment — note that it is not the order the robot will eventually execute.
+            </p>
+            <p>
+              The full demonstration is then obtained by playing the recorded segments back along the time-ordered
+              trajectory. <b>Single-stage</b> tasks (top) need one reverse-recorded segment; <b>multi-stage</b> tasks
+              (bottom) alternate several forward and reverse segments. Either way the operator skips every hard
+              alignment motion, and what comes out is an ordinary forward demonstration.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End overview -->
+
+  <!-- Method -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3 has-text-centered">Why reverse?</h2>
+          <div class="content has-text-justified">
+            <p>
+              Teleoperation difficulty is <b>asymmetric</b>. Inserting a peg into a hole demands millimeter-level
+              alignment; <i>extracting</i> the same peg starts from a feasible contact configuration and skips the
+              alignment phase entirely. Better still, the geometric boundaries that obstruct the forward motion act as
+              <b>natural guides</b> along the reverse path.
+            </p>
+            <p>
+              Naively replaying the recorded actions backwards does not work, because the dynamics are not
+              time-symmetric — gravity resists upward motion but assists downward motion, while friction always opposes
+              travel. Reversing the action stream also degrades execution to open loop, and residual errors accumulate
+              until the trajectory diverges.
+            </p>
+            <p>
+              RPM therefore treats the time-reversed <b>end-effector pose sequence</b> as a reference trajectory and
+              <b>re-executes</b> it in simulation, re-deriving the actions from the tracking error. Both the action
+              stream and the camera images are recorded anew, so every modality stays in sync with a physically valid
+              rollout; only successful regenerations are kept. Forward and reverse segments are then concatenated and
+              augmented at scale with MimicGen.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End method -->
+
+  <!-- Results -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Up to 3&times; faster collection</h2>
+      <img class="figure-plate" src="static/images/fig4_efficiency.png" alt="Successful demonstrations collected per 30-minute session, with and without RPM"/>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              An expert (Operator&nbsp;A, 100+ hours) and a non-expert (Operator&nbsp;B, under one hour) each collected
+              data for 30 minutes per task. RPM helps both, but the gain is largest for the non-expert and for
+              longer-horizon tasks — exactly where conventional teleoperation is weakest. On Peg-in-Hole,
+              Operator&nbsp;B goes from 12 to 36 demonstrations (<b>3&times;</b>); on Stacking-and-Peg Assembly, from 5
+              to 21.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Better policies, same data quantity</h2>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              We fine-tune <b>GR00T N1.5</b> on the augmented datasets. The same number of seed demonstrations and the
+              same augmentation factor are used with and without RPM, so any difference reflects data <i>quality</i>,
+              not quantity. Success rates improve on every one of the five tasks.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rollout videos: one tab per task, baseline vs. RPM side by side.
+           To fill a slot, drop the file in static/videos/ and replace the
+           <div class="video-placeholder">…</div> with:
+             <video muted loop playsinline preload="none">
+               <source src="static/videos/task1_baseline.mp4" type="video/mp4">
+             </video>
+           setupTaskTabs() in static/js/index.js plays the visible pair and pauses the rest.
+      -->
+      <div class="task-tabs">
+
+        <div class="task-tablist" role="tablist" aria-label="Evaluation tasks">
+          <button class="task-tab is-active" role="tab" id="task-tab-1" aria-controls="task-panel-1" aria-selected="true" tabindex="0">1 &middot; Slot-Insertion</button>
+          <button class="task-tab" role="tab" id="task-tab-2" aria-controls="task-panel-2" aria-selected="false" tabindex="-1">2 &middot; Peg-in-Hole</button>
+          <button class="task-tab" role="tab" id="task-tab-3" aria-controls="task-panel-3" aria-selected="false" tabindex="-1">3 &middot; Cube Stacking</button>
+          <button class="task-tab" role="tab" id="task-tab-4" aria-controls="task-panel-4" aria-selected="false" tabindex="-1">4 &middot; Three-Cube Stacking</button>
+          <button class="task-tab" role="tab" id="task-tab-5" aria-controls="task-panel-5" aria-selected="false" tabindex="-1">5 &middot; Stacking-and-Peg Assembly</button>
+        </div>
+
+        <div class="task-compare-head" aria-hidden="true">
+          <span>w/o RPM</span>
+          <span class="is-rpm">w/ RPM</span>
+        </div>
+
+        <div class="task-panel is-active" role="tabpanel" id="task-panel-1" aria-labelledby="task-tab-1">
+          <div class="task-videos">
+            <figure>
+              <div class="video-placeholder" data-src="static/videos/task1_baseline.mp4"><span><b>Task 1</b> &middot; w/o RPM<br>coming soon</span></div>
+              <figcaption>w/o RPM</figcaption>
+            </figure>
+            <figure>
+              <div class="video-placeholder" data-src="static/videos/task1_rpm.mp4"><span><b>Task 1</b> &middot; w/ RPM<br>coming soon</span></div>
+              <figcaption class="is-rpm">w/ RPM</figcaption>
+            </figure>
+          </div>
+          <p class="task-caption">Slot-Insertion <span class="task-tag">single-stage</span></p>
+        </div>
+
+        <div class="task-panel" role="tabpanel" id="task-panel-2" aria-labelledby="task-tab-2" hidden>
+          <div class="task-videos">
+            <figure>
+              <div class="video-placeholder" data-src="static/videos/task2_baseline.mp4"><span><b>Task 2</b> &middot; w/o RPM<br>coming soon</span></div>
+              <figcaption>w/o RPM</figcaption>
+            </figure>
+            <figure>
+              <div class="video-placeholder" data-src="static/videos/task2_rpm.mp4"><span><b>Task 2</b> &middot; w/ RPM<br>coming soon</span></div>
+              <figcaption class="is-rpm">w/ RPM</figcaption>
+            </figure>
+          </div>
+          <p class="task-caption">Peg-in-Hole <span class="task-tag">single-stage</span></p>
+        </div>
+
+        <div class="task-panel" role="tabpanel" id="task-panel-3" aria-labelledby="task-tab-3" hidden>
+          <div class="task-videos">
+            <figure>
+              <div class="video-placeholder" data-src="static/videos/task3_baseline.mp4"><span><b>Task 3</b> &middot; w/o RPM<br>coming soon</span></div>
+              <figcaption>w/o RPM</figcaption>
+            </figure>
+            <figure>
+              <div class="video-placeholder" data-src="static/videos/task3_rpm.mp4"><span><b>Task 3</b> &middot; w/ RPM<br>coming soon</span></div>
+              <figcaption class="is-rpm">w/ RPM</figcaption>
+            </figure>
+          </div>
+          <p class="task-caption">Cube Stacking <span class="task-tag">single-stage</span></p>
+        </div>
+
+        <div class="task-panel" role="tabpanel" id="task-panel-4" aria-labelledby="task-tab-4" hidden>
+          <div class="task-videos">
+            <figure>
+              <div class="video-placeholder" data-src="static/videos/task4_baseline.mp4"><span><b>Task 4</b> &middot; w/o RPM<br>coming soon</span></div>
+              <figcaption>w/o RPM</figcaption>
+            </figure>
+            <figure>
+              <div class="video-placeholder" data-src="static/videos/task4_rpm.mp4"><span><b>Task 4</b> &middot; w/ RPM<br>coming soon</span></div>
+              <figcaption class="is-rpm">w/ RPM</figcaption>
+            </figure>
+          </div>
+          <p class="task-caption">Three-Cube Stacking <span class="task-tag">multi-stage</span></p>
+        </div>
+
+        <div class="task-panel" role="tabpanel" id="task-panel-5" aria-labelledby="task-tab-5" hidden>
+          <div class="task-videos">
+            <figure>
+              <div class="video-placeholder" data-src="static/videos/task5_baseline.mp4"><span><b>Task 5</b> &middot; w/o RPM<br>coming soon</span></div>
+              <figcaption>w/o RPM</figcaption>
+            </figure>
+            <figure>
+              <div class="video-placeholder" data-src="static/videos/task5_rpm.mp4"><span><b>Task 5</b> &middot; w/ RPM<br>coming soon</span></div>
+              <figcaption class="is-rpm">w/ RPM</figcaption>
+            </figure>
+          </div>
+          <p class="task-caption">Stacking-and-Peg Assembly <span class="task-tag">multi-stage</span></p>
+        </div>
+
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="table-container">
+            <table class="table is-fullwidth is-striped is-hoverable">
+              <thead>
+                <tr>
+                  <th>Single-stage &nbsp;<small>(success rate)</small></th>
+                  <th>Cube Stacking</th>
+                  <th>Slot-Insertion</th>
+                  <th>Peg-in-Hole</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Relative task pose</td><td>32%</td><td>60%</td><td>36%</td></tr>
+                <tr><td>Relative task pose <b>+ RPM</b></td><td><b>60%</b></td><td><b>70%</b></td><td><b>50%</b></td></tr>
+                <tr><td>Absolute joint angle</td><td>78%</td><td>96%</td><td>56%</td></tr>
+                <tr><td>Absolute joint angle <b>+ RPM</b></td><td><b>96%</b></td><td><b>98%</b></td><td><b>74%</b></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="table-container">
+            <table class="table is-fullwidth is-striped is-hoverable">
+              <thead>
+                <tr>
+                  <th>Multi-stage &nbsp;<small>(success rate, with Temporal Ensemble)</small></th>
+                  <th>Three-Cube Stacking</th>
+                  <th>Stacking-and-Peg Assembly</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Absolute joint angle</td><td>76%</td><td>6%</td></tr>
+                <tr><td>Absolute joint angle <b>+ RPM</b></td><td><b>86%</b></td><td><b>32%</b></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="has-text-centered is-size-6">The advantage grows with task horizon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Where the gain comes from</h2>
+      <img class="figure-plate" src="static/images/fig5_trajectory.png" alt="Trajectory comparison between conventional teleoperation and RPM"/>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              Conventional teleoperation oscillates and collides during the final approach — variability that
+              destabilizes the learned policy. Recording from the goal state suppresses that noise: trajectory standard
+              deviation drops from <b>3.74 to 2.66</b> (&minus;28.8%) for stacking and <b>4.04 to 2.77</b> (&minus;31.5%)
+              for insertion.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End results -->
+
+  <!-- BibTeX -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@article{kim2026reverse,
+  title={Reverse Playback Motion: A Simple Way for Anyone to Obtain High-Quality Demonstration Data},
+  author={Kim, Hyunjun and Won, Jaeseog and Jung, Hong-ryul and Kim, Donghoon and Ko, Minsuk and Moon, Hyungpil},
+  journal={International Journal of Precision Engineering and Manufacturing},
+  pages={1--11},
+  year={2026},
+  publisher={Springer}
+}</code></pre>
+    </div>
+  </section>
+  <!-- End BibTeX -->
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This work was supported by the Technology Innovation Program (RS-2025-25449082) and the Technology
+              Innovation Program 2410012091 (00443027) funded by the Ministry of Trade, Industry and Energy (MOTIE, Korea).
+            </p>
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
