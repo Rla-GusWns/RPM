@@ -786,15 +786,11 @@ a:focus {
 
 .task-tablist {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-  max-width: 340px;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
   margin: 0 auto 2.25rem;
-}
-
-.task-group {
-  width: 100%;
 }
 
 /* Single- and multi-stage tasks are bracketed separately so a visitor can tell
@@ -812,8 +808,8 @@ a:focus {
 
 .task-group-tabs {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  flex-wrap: nowrap;
+  justify-content: center;
   gap: 0.4rem;
   padding-top: 0.8rem;
   border-top: 2px solid rgba(0, 82, 186, 0.3);
@@ -839,9 +835,7 @@ a:focus {
 }
 
 .task-tab {
-  width: 100%;
-  text-align: center;
-  padding: 0.55rem 1rem;
+  padding: 0.5rem 0.85rem;
   border: 2px solid var(--border-color);
   border-radius: 999px;
   background: var(--background-primary);
@@ -967,6 +961,15 @@ a:focus {
   font-size: 0.8rem;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.32);
+}
+
+/* One row only fits at full desktop width; below that let it wrap rather than
+   push a horizontal scrollbar onto the page. */
+@media screen and (max-width: 1023px) {
+  .task-tablist,
+  .task-group-tabs {
+    flex-wrap: wrap;
+  }
 }
 
 @media screen and (max-width: 600px) {
