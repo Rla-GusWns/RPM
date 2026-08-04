@@ -1007,3 +1007,23 @@ a:focus {
 .rpm-initial {
   color: #0052ba;
 }
+
+/* Bulma paints tables white, which leaves them floating on the tinted sections.
+   Transparent instead, with stripes and hover as translucent tints so they read
+   on whatever the section behind them happens to be. */
+.table,
+.table thead th,
+.table tbody th,
+.table tbody td,
+.table tfoot th,
+.table tfoot td {
+  background-color: transparent;
+}
+
+.table.is-striped tbody tr:not(.is-selected):nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.035);
+}
+
+.table.is-hoverable tbody tr:not(.is-selected):hover {
+  background-color: rgba(0, 82, 186, 0.07);
+}
