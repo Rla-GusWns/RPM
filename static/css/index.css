@@ -1028,40 +1028,12 @@ a:focus {
   background-color: rgba(0, 82, 186, 0.07);
 }
 
-/* Title and the animated reverse mark, centred as one group. The mark is
-   decorative, so its alt is empty and it drops out on narrow screens where the
-   two-line title already fills the width. */
-.title-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-/* Keep the heading centred: everything below it is centred too, and letting the
-   title alone go flush left threw the block off axis. */
-.title-row .publication-title {
-  margin-bottom: 0 !important;
-}
-
-.title-mark {
-  flex: 0 0 auto;
-  line-height: 0;
-}
-
+/* The reverse mark sits inline at the head of the title, sized in em so it
+   tracks the heading as Bulma resizes it — no breakpoint of its own. */
 .title-mark img {
-  width: 104px;
-  height: 104px;
-}
-
-@media screen and (max-width: 900px) {
-  .title-row {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .title-mark img {
-    width: 76px;
-    height: 76px;
-  }
+  display: inline;
+  height: 0.92em;
+  width: auto;
+  vertical-align: -0.14em;
+  margin-right: 0.22em;
 }
