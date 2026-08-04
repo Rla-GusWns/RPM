@@ -1001,3 +1001,9 @@ a:focus {
   width: 100%;
   margin: 1.75rem auto 2.75rem;
 }
+
+/* R, P, M of the title, in the blue of the reverse card. The rest of the
+   heading keeps --text-primary, so the acronym reads out of the full name. */
+.rpm-initial {
+  color: #0052ba;
+}
