@@ -12,3 +12,7 @@ teaser_assets/
 
 # Original simulation captures; the web-sized copies sit next to them.
 static/videos/Demo*/
+
+# Master teaser; static/videos/teaser.mp4 is the same stream remuxed for streaming.
+RPM_Teaser.mp4
+demo4_rev*.mp4

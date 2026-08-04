@@ -952,9 +952,14 @@ a:focus {
   background: rgba(0, 0, 0, 0.03);
 }
 
-/* Isaac Sim renders square, so the clips and their empty slots are 1:1. */
-.video-placeholder.is-teaser {
+/* The teaser is 16:9 and sits at the top of the page. */
+.teaser video {
+  display: block;
+  width: 100%;
   aspect-ratio: 16 / 9;
+  border-radius: var(--border-radius);
+  background: #000;
+  box-shadow: var(--shadow-md);
 }
 
 .video-placeholder span {

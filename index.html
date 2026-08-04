@@ -54,7 +54,7 @@
 
   <!-- Critical CSS -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css?v=18">
+  <link rel="stylesheet" href="static/css/index.css?v=19">
 
   <!-- Non-critical CSS -->
   <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -67,7 +67,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script defer src="static/js/index.js?v=18"></script>
+  <script defer src="static/js/index.js?v=19"></script>
 
   <script type="application/ld+json">
   {
@@ -173,14 +173,11 @@
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
-        <!-- Teaser video. Once the file exists, replace the placeholder below with:
-        <video autoplay controls muted loop playsinline preload="metadata">
+        <!-- 84 s, so it plays on click rather than on load: preload="metadata" fetches
+             only the header, and the poster fills the frame until then. -->
+        <video controls playsinline preload="metadata" poster="static/images/teaser_poster.jpg">
           <source src="static/videos/teaser.mp4" type="video/mp4">
         </video>
-        -->
-        <div class="video-placeholder is-teaser" data-src="static/videos/teaser.mp4">
-          <span><b>Teaser video</b><br>coming soon</span>
-        </div>
         <h2 class="subtitle has-text-centered">
           Hard sub-tasks are teleoperated <b>backward from the goal state</b>, easy ones forward.
           Time-reversing and re-simulating the reverse segments yields a complete forward demonstration —
