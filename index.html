@@ -54,7 +54,7 @@
 
   <!-- Critical CSS -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css?v=14">
+  <link rel="stylesheet" href="static/css/index.css?v=16">
 
   <!-- Non-critical CSS -->
   <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -67,7 +67,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script defer src="static/js/index.js?v=14"></script>
+  <script defer src="static/js/index.js?v=16"></script>
 
   <script type="application/ld+json">
   {
@@ -107,7 +107,7 @@
             <!-- The three letters of the acronym are picked out in the card blue.
                  The mark beside them is the animated reverse card; <source> swaps it for a
                  still frame when the visitor has asked for reduced motion. -->
-            <h1 class="title is-1 publication-title"><picture class="title-mark"><source srcset="static/images/reverse_mark_static.png" media="(prefers-reduced-motion: reduce)"><source srcset="static/images/reverse_mark.webp" type="image/webp"><img src="static/images/reverse_mark.gif" alt="" width="160" height="160"></picture><span class="rpm-initial">R</span>everse <span class="rpm-initial">P</span>layback <span class="rpm-initial">M</span>otion:<br>A Simple Way for Anyone to Obtain High-Quality Demonstration Data</h1>
+            <h1 class="title is-1 publication-title"><picture class="title-mark"><source srcset="static/images/reverse_mark_static.png" media="(prefers-reduced-motion: reduce)"><source srcset="static/images/reverse_mark.webp" type="image/webp"><img src="static/images/reverse_mark.gif" alt="" width="176" height="176"></picture><span class="rpm-initial">R</span>everse <span class="rpm-initial">P</span>layback <span class="rpm-initial">M</span>otion:<br>A Simple Way for Anyone to Obtain High-Quality Demonstration Data</h1>
             <!-- To link an author, wrap the name only (not the superscripts):
                    <span class="author-block"><a href="https://scholar.google.com/citations?user=ID"
                      target="_blank">Hyunjun Kim</a><sup>1</sup><sup>*</sup>,</span>
@@ -352,13 +352,13 @@
         <div class="task-panel is-active" role="tabpanel" id="task-panel-cube-stacking" aria-labelledby="task-tab-cube-stacking">
           <div class="task-videos">
             <figure>
-              <video muted playsinline preload="metadata">
+              <video muted loop playsinline preload="metadata">
                 <source src="static/videos/cube_stacking_baseline.mp4" type="video/mp4">
               </video>
               <figcaption>Without RPM</figcaption>
             </figure>
             <figure>
-              <video muted playsinline preload="metadata">
+              <video muted loop playsinline preload="metadata">
                 <source src="static/videos/cube_stacking_rpm.mp4" type="video/mp4">
               </video>
               <figcaption class="is-rpm">With RPM</figcaption>
@@ -370,13 +370,13 @@
         <div class="task-panel" role="tabpanel" id="task-panel-slot-insertion" aria-labelledby="task-tab-slot-insertion" hidden>
           <div class="task-videos">
             <figure>
-              <video muted playsinline preload="metadata">
+              <video muted loop playsinline preload="metadata">
                 <source src="static/videos/slot_insertion_baseline.mp4" type="video/mp4">
               </video>
               <figcaption>Without RPM</figcaption>
             </figure>
             <figure>
-              <video muted playsinline preload="metadata">
+              <video muted loop playsinline preload="metadata">
                 <source src="static/videos/slot_insertion_rpm.mp4" type="video/mp4">
               </video>
               <figcaption class="is-rpm">With RPM</figcaption>
@@ -388,13 +388,13 @@
         <div class="task-panel" role="tabpanel" id="task-panel-peg-in-hole" aria-labelledby="task-tab-peg-in-hole" hidden>
           <div class="task-videos">
             <figure>
-              <video muted playsinline preload="metadata">
+              <video muted loop playsinline preload="metadata">
                 <source src="static/videos/peg_in_hole_baseline.mp4" type="video/mp4">
               </video>
               <figcaption>Without RPM</figcaption>
             </figure>
             <figure>
-              <video muted playsinline preload="metadata">
+              <video muted loop playsinline preload="metadata">
                 <source src="static/videos/peg_in_hole_rpm.mp4" type="video/mp4">
               </video>
               <figcaption class="is-rpm">With RPM</figcaption>
@@ -420,13 +420,14 @@
         <div class="task-panel" role="tabpanel" id="task-panel-stacking-and-peg" aria-labelledby="task-tab-stacking-and-peg" hidden>
           <div class="task-videos">
             <figure>
-              <video muted playsinline preload="metadata">
+              <!-- The unaided run is laboured; 0.8x keeps it legible beside the RPM one. -->
+              <video muted loop playsinline preload="metadata" data-rate="0.8">
                 <source src="static/videos/stacking_and_peg_baseline.mp4" type="video/mp4">
               </video>
               <figcaption>Without RPM</figcaption>
             </figure>
             <figure>
-              <video muted playsinline preload="metadata">
+              <video muted loop playsinline preload="metadata">
                 <source src="static/videos/stacking_and_peg_rpm.mp4" type="video/mp4">
               </video>
               <figcaption class="is-rpm">With RPM</figcaption>

@@ -120,9 +120,11 @@ function setupVideoCarouselAutoplay() {
     });
 }
 
-// Per-task rollout tabs: show one task's baseline/RPM pair at a time. Clicking a
-// tab restarts that pair from zero and plays both, so the two clips are always
-// compared from the same instant, and only the visible pair decodes.
+// Per-task rollout tabs: show one task's baseline/RPM pair at a time. Opening a
+// tab rewinds both clips and starts them together, so the comparison always
+// begins at the same instant; after that each loops on its own, since the pair
+// differ in length and holding the shorter one on its last frame meant a long
+// wait on the multi-stage task. Only the visible pair decodes.
 function setupTaskTabs() {
     const tabs = Array.from(document.querySelectorAll('.task-tab'));
     if (tabs.length === 0) return;
@@ -137,26 +139,14 @@ function setupTaskTabs() {
     }
 
     function startPair(panel) {
-        const clips = clipsOf(panel);
-        clips.forEach(rewind);
-        clips.forEach(function(video) {
+        clipsOf(panel).forEach(function(video) {
+            rewind(video);
+            // data-rate slows a clip that is hard to follow at full speed.
+            const rate = parseFloat(video.dataset.rate || '1');
+            if (rate > 0 && rate !== video.playbackRate) video.playbackRate = rate;
             video.play().catch(function() { /* autoplay may be blocked */ });
         });
     }
-
-    // Loop the pair as a unit. The clips differ in length — the RPM run finishes
-    // sooner — so looping them independently would drift them apart after one
-    // pass. Waiting for both means the quicker one holds on its last frame,
-    // which is itself the point being made.
-    panels.forEach(function(panel) {
-        const clips = clipsOf(panel);
-        clips.forEach(function(video) {
-            video.addEventListener('ended', function() {
-                if (!panel.classList.contains('is-active')) return;
-                if (clips.every(function(c) { return c.ended; })) startPair(panel);
-            });
-        });
-    });
 
     function activate(index) {
         tabs.forEach(function(tab, i) {
