@@ -54,7 +54,7 @@
 
   <!-- Critical CSS -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css?v=17">
+  <link rel="stylesheet" href="static/css/index.css?v=18">
 
   <!-- Non-critical CSS -->
   <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -67,7 +67,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script defer src="static/js/index.js?v=17"></script>
+  <script defer src="static/js/index.js?v=18"></script>
 
   <script type="application/ld+json">
   {
@@ -388,7 +388,8 @@
         <div class="task-panel" role="tabpanel" id="task-panel-peg-in-hole" aria-labelledby="task-tab-peg-in-hole" hidden>
           <div class="task-videos">
             <figure>
-              <video muted playsinline preload="metadata">
+              <!-- 1.5x so more of this run fits inside the loop the RPM clip paces. -->
+              <video muted playsinline preload="metadata" data-rate="1.5">
                 <source src="static/videos/peg_in_hole_baseline.mp4" type="video/mp4">
               </video>
               <figcaption>Without RPM</figcaption>
@@ -420,7 +421,7 @@
         <div class="task-panel" role="tabpanel" id="task-panel-stacking-and-peg" aria-labelledby="task-tab-stacking-and-peg" hidden>
           <div class="task-videos">
             <figure>
-              <!-- The unaided run is laboured; 0.7x keeps it legible beside the RPM one. -->
+              <!-- 0.7x: this run is quick and fiddly to follow at full speed. -->
               <video muted playsinline preload="metadata" data-rate="0.7">
                 <source src="static/videos/stacking_and_peg_baseline.mp4" type="video/mp4">
               </video>
