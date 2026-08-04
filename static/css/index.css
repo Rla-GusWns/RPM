@@ -952,7 +952,8 @@ a:focus {
   background: rgba(0, 0, 0, 0.03);
 }
 
-/* The teaser is 16:9 and sits at the top of the page. */
+/* The teaser is 16:9 and sits at the top of the page. Bulma leaves no margin
+   between a video and the subtitle under it, so the caption is spaced here. */
 .teaser video {
   display: block;
   width: 100%;
@@ -960,6 +961,7 @@ a:focus {
   border-radius: var(--border-radius);
   background: #000;
   box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
 }
 
 .video-placeholder span {
