@@ -120,11 +120,14 @@ function setupVideoCarouselAutoplay() {
     });
 }
 
-// Per-task rollout tabs: show one task's baseline/RPM pair at a time. Opening a
-// tab rewinds both clips and starts them together, so the comparison always
-// begins at the same instant; after that each loops on its own, since the pair
-// differ in length and holding the shorter one on its last frame meant a long
-// wait on the multi-stage task. Only the visible pair decodes.
+// Per-task rollout tabs: show one task's baseline/RPM pair at a time.
+//
+// Opening a tab rewinds both clips and starts them together, so the comparison
+// always begins at the same instant. The RPM clip carries data-pacer and sets the
+// loop period: when it ends, both restart. That truncates the unaided run, which
+// is longer on every task but one — and that is the point, since RPM has already
+// finished while the baseline is still going. Neither clip has the loop
+// attribute; a clip shorter than the pacer just holds on its last frame.
 function setupTaskTabs() {
     const tabs = Array.from(document.querySelectorAll('.task-tab'));
     if (tabs.length === 0) return;
@@ -143,10 +146,18 @@ function setupTaskTabs() {
             rewind(video);
             // data-rate slows a clip that is hard to follow at full speed.
             const rate = parseFloat(video.dataset.rate || '1');
-            if (rate > 0 && rate !== video.playbackRate) video.playbackRate = rate;
+            if (rate > 0 && video.playbackRate !== rate) video.playbackRate = rate;
             video.play().catch(function() { /* autoplay may be blocked */ });
         });
     }
+
+    panels.forEach(function(panel) {
+        const pacer = panel.querySelector('video[data-pacer]');
+        if (!pacer) return;
+        pacer.addEventListener('ended', function() {
+            if (panel.classList.contains('is-active')) startPair(panel);
+        });
+    });
 
     function activate(index) {
         tabs.forEach(function(tab, i) {
