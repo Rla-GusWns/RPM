@@ -946,13 +946,13 @@ a:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   border: 2px dashed rgba(0, 0, 0, 0.18);
   border-radius: var(--border-radius);
   background: rgba(0, 0, 0, 0.03);
 }
 
-/* The teaser sits at the top of the page, so it gets a wider frame. */
+/* Isaac Sim renders square, so the clips and their empty slots are 1:1. */
 .video-placeholder.is-teaser {
   aspect-ratio: 16 / 9;
 }

@@ -313,31 +313,26 @@
       </div>
 
       <!-- Rollout videos: one tab per task, baseline vs. RPM side by side.
-           To fill a slot, drop the file in static/videos/ and replace the
-           <div class="video-placeholder">…</div> with:
-             <video muted loop playsinline preload="none">
-               <source src="static/videos/task1_baseline.mp4" type="video/mp4">
-             </video>
+           Sources are the Isaac Sim captures in static/videos/Demo*/, rescaled to 720px
+           with faststart so playback can begin before the file finishes downloading.
+           Three-Cube Stacking has no recordings yet, so it has no tab.
            setupTaskTabs() in static/js/index.js plays the visible pair and pauses the rest.
       -->
       <div class="task-tabs">
 
-        <!-- Grouped so the stage is visible before any tab is clicked. The wrappers are
-             presentational so the tablist still exposes only the five tabs. -->
         <div class="task-tablist" role="tablist" aria-label="Evaluation tasks">
           <div class="task-group" role="presentation">
             <span class="task-group-label">Single stage</span>
             <div class="task-group-tabs" role="presentation">
-              <button class="task-tab is-active" role="tab" id="task-tab-1" aria-controls="task-panel-1" aria-selected="true" tabindex="0">1 &middot; Slot-Insertion</button>
-              <button class="task-tab" role="tab" id="task-tab-2" aria-controls="task-panel-2" aria-selected="false" tabindex="-1">2 &middot; Peg-in-Hole</button>
-              <button class="task-tab" role="tab" id="task-tab-3" aria-controls="task-panel-3" aria-selected="false" tabindex="-1">3 &middot; Cube Stacking</button>
+              <button class="task-tab is-active" role="tab" id="task-tab-slot-insertion" aria-controls="task-panel-slot-insertion" aria-selected="true" tabindex="0">Slot-Insertion</button>
+              <button class="task-tab" role="tab" id="task-tab-peg-in-hole" aria-controls="task-panel-peg-in-hole" aria-selected="false" tabindex="-1">Peg-in-Hole</button>
+              <button class="task-tab" role="tab" id="task-tab-cube-stacking" aria-controls="task-panel-cube-stacking" aria-selected="false" tabindex="-1">Cube Stacking</button>
             </div>
           </div>
           <div class="task-group is-multi" role="presentation">
             <span class="task-group-label">Multi stage</span>
             <div class="task-group-tabs" role="presentation">
-              <button class="task-tab" role="tab" id="task-tab-4" aria-controls="task-panel-4" aria-selected="false" tabindex="-1">4 &middot; Three-Cube Stacking</button>
-              <button class="task-tab" role="tab" id="task-tab-5" aria-controls="task-panel-5" aria-selected="false" tabindex="-1">5 &middot; Stacking-and-Peg Assembly</button>
+              <button class="task-tab" role="tab" id="task-tab-stacking-and-peg" aria-controls="task-panel-stacking-and-peg" aria-selected="false" tabindex="-1">Stacking-and-Peg Assembly</button>
             </div>
           </div>
         </div>
@@ -347,70 +342,72 @@
           <span class="is-rpm">With RPM</span>
         </div>
 
-        <div class="task-panel is-active" role="tabpanel" id="task-panel-1" aria-labelledby="task-tab-1">
+        <div class="task-panel is-active" role="tabpanel" id="task-panel-slot-insertion" aria-labelledby="task-tab-slot-insertion">
           <div class="task-videos">
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task1_baseline.mp4"><span><b>Task 1</b> &middot; Without RPM<br>coming soon</span></div>
+              <video muted loop playsinline preload="metadata">
+                <source src="static/videos/slot_insertion_baseline.mp4" type="video/mp4">
+              </video>
               <figcaption>Without RPM</figcaption>
             </figure>
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task1_rpm.mp4"><span><b>Task 1</b> &middot; With RPM<br>coming soon</span></div>
+              <video muted loop playsinline preload="metadata">
+                <source src="static/videos/slot_insertion_rpm.mp4" type="video/mp4">
+              </video>
               <figcaption class="is-rpm">With RPM</figcaption>
             </figure>
           </div>
           <p class="task-caption">Slot-Insertion</p>
         </div>
 
-        <div class="task-panel" role="tabpanel" id="task-panel-2" aria-labelledby="task-tab-2" hidden>
+        <div class="task-panel" role="tabpanel" id="task-panel-peg-in-hole" aria-labelledby="task-tab-peg-in-hole" hidden>
           <div class="task-videos">
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task2_baseline.mp4"><span><b>Task 2</b> &middot; Without RPM<br>coming soon</span></div>
+              <video muted loop playsinline preload="metadata">
+                <source src="static/videos/peg_in_hole_baseline.mp4" type="video/mp4">
+              </video>
               <figcaption>Without RPM</figcaption>
             </figure>
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task2_rpm.mp4"><span><b>Task 2</b> &middot; With RPM<br>coming soon</span></div>
+              <video muted loop playsinline preload="metadata">
+                <source src="static/videos/peg_in_hole_rpm.mp4" type="video/mp4">
+              </video>
               <figcaption class="is-rpm">With RPM</figcaption>
             </figure>
           </div>
           <p class="task-caption">Peg-in-Hole</p>
         </div>
 
-        <div class="task-panel" role="tabpanel" id="task-panel-3" aria-labelledby="task-tab-3" hidden>
+        <div class="task-panel" role="tabpanel" id="task-panel-cube-stacking" aria-labelledby="task-tab-cube-stacking" hidden>
           <div class="task-videos">
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task3_baseline.mp4"><span><b>Task 3</b> &middot; Without RPM<br>coming soon</span></div>
+              <video muted loop playsinline preload="metadata">
+                <source src="static/videos/cube_stacking_baseline.mp4" type="video/mp4">
+              </video>
               <figcaption>Without RPM</figcaption>
             </figure>
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task3_rpm.mp4"><span><b>Task 3</b> &middot; With RPM<br>coming soon</span></div>
+              <video muted loop playsinline preload="metadata">
+                <source src="static/videos/cube_stacking_rpm.mp4" type="video/mp4">
+              </video>
               <figcaption class="is-rpm">With RPM</figcaption>
             </figure>
           </div>
           <p class="task-caption">Cube Stacking</p>
         </div>
 
-        <div class="task-panel" role="tabpanel" id="task-panel-4" aria-labelledby="task-tab-4" hidden>
+        <div class="task-panel" role="tabpanel" id="task-panel-stacking-and-peg" aria-labelledby="task-tab-stacking-and-peg" hidden>
           <div class="task-videos">
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task4_baseline.mp4"><span><b>Task 4</b> &middot; Without RPM<br>coming soon</span></div>
+              <video muted loop playsinline preload="metadata">
+                <source src="static/videos/stacking_and_peg_baseline.mp4" type="video/mp4">
+              </video>
               <figcaption>Without RPM</figcaption>
             </figure>
             <figure>
-              <div class="video-placeholder" data-src="static/videos/task4_rpm.mp4"><span><b>Task 4</b> &middot; With RPM<br>coming soon</span></div>
-              <figcaption class="is-rpm">With RPM</figcaption>
-            </figure>
-          </div>
-          <p class="task-caption">Three-Cube Stacking</p>
-        </div>
-
-        <div class="task-panel" role="tabpanel" id="task-panel-5" aria-labelledby="task-tab-5" hidden>
-          <div class="task-videos">
-            <figure>
-              <div class="video-placeholder" data-src="static/videos/task5_baseline.mp4"><span><b>Task 5</b> &middot; Without RPM<br>coming soon</span></div>
-              <figcaption>Without RPM</figcaption>
-            </figure>
-            <figure>
-              <div class="video-placeholder" data-src="static/videos/task5_rpm.mp4"><span><b>Task 5</b> &middot; With RPM<br>coming soon</span></div>
+              <video muted loop playsinline preload="metadata">
+                <source src="static/videos/stacking_and_peg_rpm.mp4" type="video/mp4">
+              </video>
               <figcaption class="is-rpm">With RPM</figcaption>
             </figure>
           </div>

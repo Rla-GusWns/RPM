@@ -6,3 +6,9 @@ figure/
 
 # Source photo for the favicon; the cropped icons live in static/images/.
 reverse_card.png
+
+# Source material for the teaser video, not part of the published site.
+teaser_assets/
+
+# Original simulation captures; the web-sized copies sit next to them.
+static/videos/Demo*/
