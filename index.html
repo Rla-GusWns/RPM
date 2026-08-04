@@ -313,9 +313,12 @@
       </div>
 
       <!-- Rollout videos: one tab per task, baseline vs. RPM side by side.
+           Task order follows Tables 1 and 2 of the paper.
            Sources are the Isaac Sim captures in static/videos/Demo*/, rescaled to 720px
            with faststart so playback can begin before the file finishes downloading.
-           Three-Cube Stacking has no recordings yet, so it has no tab.
+           Three-Cube Stacking has no recordings yet; to fill it, drop the files in
+           static/videos/ under the names in the placeholders' data-src and swap each
+           <div class="video-placeholder"> for the same <video> block the others use.
            setupTaskTabs() in static/js/index.js plays the visible pair and pauses the rest.
       -->
       <div class="task-tabs">
@@ -324,14 +327,15 @@
           <div class="task-group" role="presentation">
             <span class="task-group-label">Single stage</span>
             <div class="task-group-tabs" role="presentation">
-              <button class="task-tab is-active" role="tab" id="task-tab-slot-insertion" aria-controls="task-panel-slot-insertion" aria-selected="true" tabindex="0">Slot-Insertion</button>
+              <button class="task-tab is-active" role="tab" id="task-tab-cube-stacking" aria-controls="task-panel-cube-stacking" aria-selected="true" tabindex="0">Cube Stacking</button>
+              <button class="task-tab" role="tab" id="task-tab-slot-insertion" aria-controls="task-panel-slot-insertion" aria-selected="false" tabindex="-1">Slot-Insertion</button>
               <button class="task-tab" role="tab" id="task-tab-peg-in-hole" aria-controls="task-panel-peg-in-hole" aria-selected="false" tabindex="-1">Peg-in-Hole</button>
-              <button class="task-tab" role="tab" id="task-tab-cube-stacking" aria-controls="task-panel-cube-stacking" aria-selected="false" tabindex="-1">Cube Stacking</button>
             </div>
           </div>
           <div class="task-group is-multi" role="presentation">
             <span class="task-group-label">Multi stage</span>
             <div class="task-group-tabs" role="presentation">
+              <button class="task-tab" role="tab" id="task-tab-three-cube-stacking" aria-controls="task-panel-three-cube-stacking" aria-selected="false" tabindex="-1">Three-Cube Stacking</button>
               <button class="task-tab" role="tab" id="task-tab-stacking-and-peg" aria-controls="task-panel-stacking-and-peg" aria-selected="false" tabindex="-1">Stacking-and-Peg Assembly</button>
             </div>
           </div>
@@ -342,7 +346,25 @@
           <span class="is-rpm">With RPM</span>
         </div>
 
-        <div class="task-panel is-active" role="tabpanel" id="task-panel-slot-insertion" aria-labelledby="task-tab-slot-insertion">
+        <div class="task-panel is-active" role="tabpanel" id="task-panel-cube-stacking" aria-labelledby="task-tab-cube-stacking">
+          <div class="task-videos">
+            <figure>
+              <video muted loop playsinline preload="metadata">
+                <source src="static/videos/cube_stacking_baseline.mp4" type="video/mp4">
+              </video>
+              <figcaption>Without RPM</figcaption>
+            </figure>
+            <figure>
+              <video muted loop playsinline preload="metadata">
+                <source src="static/videos/cube_stacking_rpm.mp4" type="video/mp4">
+              </video>
+              <figcaption class="is-rpm">With RPM</figcaption>
+            </figure>
+          </div>
+          <p class="task-caption">Cube Stacking</p>
+        </div>
+
+        <div class="task-panel" role="tabpanel" id="task-panel-slot-insertion" aria-labelledby="task-tab-slot-insertion" hidden>
           <div class="task-videos">
             <figure>
               <video muted loop playsinline preload="metadata">
@@ -378,22 +400,18 @@
           <p class="task-caption">Peg-in-Hole</p>
         </div>
 
-        <div class="task-panel" role="tabpanel" id="task-panel-cube-stacking" aria-labelledby="task-tab-cube-stacking" hidden>
+        <div class="task-panel" role="tabpanel" id="task-panel-three-cube-stacking" aria-labelledby="task-tab-three-cube-stacking" hidden>
           <div class="task-videos">
             <figure>
-              <video muted loop playsinline preload="metadata">
-                <source src="static/videos/cube_stacking_baseline.mp4" type="video/mp4">
-              </video>
+              <div class="video-placeholder" data-src="static/videos/three_cube_stacking_baseline.mp4"><span>coming soon</span></div>
               <figcaption>Without RPM</figcaption>
             </figure>
             <figure>
-              <video muted loop playsinline preload="metadata">
-                <source src="static/videos/cube_stacking_rpm.mp4" type="video/mp4">
-              </video>
+              <div class="video-placeholder" data-src="static/videos/three_cube_stacking_rpm.mp4"><span>coming soon</span></div>
               <figcaption class="is-rpm">With RPM</figcaption>
             </figure>
           </div>
-          <p class="task-caption">Cube Stacking</p>
+          <p class="task-caption">Three-Cube Stacking</p>
         </div>
 
         <div class="task-panel" role="tabpanel" id="task-panel-stacking-and-peg" aria-labelledby="task-tab-stacking-and-peg" hidden>
